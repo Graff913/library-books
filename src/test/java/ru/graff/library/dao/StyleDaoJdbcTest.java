@@ -18,47 +18,40 @@ import static org.junit.Assert.*;
 public class StyleDaoJdbcTest {
 
     @Autowired
-    private StyleDao styleDao;
+    private StyleRepository styleRepository;
 
     @Test
     public void insert() {
-        assertEquals(20, styleDao.getAll().size());
+        assertEquals(20, styleRepository.getAll().size());
         Style style = new Style("Тестовый стиль");
-        int id = styleDao.insert(style);
-        assertEquals(21, id);
-        assertEquals(21, styleDao.getAll().size());
-        Style testStyle = styleDao.getByName("Тестовый стиль");
+        styleRepository.insert(style);
+        assertEquals(21, styleRepository.getAll().size());
+        Style testStyle = styleRepository.getByName("Тестовый стиль");
         assertEquals(21, testStyle.getId());
         assertEquals("Тестовый стиль", testStyle.getName());
     }
 
     @Test
     public void getByName() {
-        Style style = styleDao.getByName("Романтизм");
+        Style style = styleRepository.getByName("Романтизм");
         assertEquals(14, style.getId());
         assertEquals("Романтизм", style.getName());
     }
 
     @Test
     public void getAll() {
-        List<Style> styles = styleDao.getAll();
+        List<Style> styles = styleRepository.getAll();
         assertEquals(20, styles.size());
-    }
-
-    @Test
-    public void getStylesByBookId() {
-        List<Style> styles = styleDao.getStylesByBookId(1);
-        assertEquals(6, styles.size());
     }
 
     @Test
     public void deleteById() {
-        List<Style> styles = styleDao.getAll();
+        List<Style> styles = styleRepository.getAll();
         assertEquals(20, styles.size());
-        styleDao.deleteById(16);
-        styles = styleDao.getAll();
+        styleRepository.delete(styles.get(16));
+        styles = styleRepository.getAll();
         assertEquals(19, styles.size());
-        Style style = styleDao.getByName("Сказки");
+        Style style = styleRepository.getByName("Сказки");
         assertNull(style);
     }
 

@@ -23,7 +23,9 @@ public class LibraryCommands {
 
     @ShellMethod("Show all books.")
     public String showAllBooks() {
-        return service.showAllBooks();
+        StringBuilder str = new StringBuilder();
+        service.showAllBooks().forEach(b -> { str.append(b); str.append("\n"); });
+        return str.toString();
     }
 
     @ShellMethod("Add book.")
@@ -39,33 +41,18 @@ public class LibraryCommands {
         service.addBook(book);
     }
 
-    @ShellMethod("Add author book.")
-    public void addAuthorBook(
-            @ShellOption String nameBook,
-            @ShellOption String nameAuthor) {
-        Book book = new Book(nameBook);
-        Author author = new Author(nameAuthor);
-        service.addAuthorBook(book, author);
-    }
-
-    @ShellMethod("Add style book.")
-    public void addStyleBook(
-            @ShellOption String nameBook,
-            @ShellOption String nameStyle) {
-        Book book = new Book(nameBook);
-        Style style = new Style(nameStyle);
-        service.addStyleBook(book, style);
-    }
-
     @ShellMethod("Show all authors.")
     public String showAllAuthor() {
-        return service.showAllAuthor();
+        StringBuilder str = new StringBuilder();
+        service.showAllAuthor().forEach(a -> { str.append(a); str.append("\n"); });
+        return str.toString();
     }
 
     @ShellMethod("Show all styles.")
     public String showAllStyles() {
-        return service.showAllBooks();
+        StringBuilder str = new StringBuilder();
+        service.showAllStyles().forEach(s -> { str.append(s); str.append("\n"); });
+        return str.toString();
     }
-
 
 }

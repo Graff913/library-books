@@ -6,18 +6,14 @@ import ru.graff.library.domain.Style;
 
 import java.util.List;
 
-public interface BookDao {
+public interface BookRepository {
 
-    int insert(Book book);
-
-    void linkAuthor(Book book, Author author);
-
-    void linkStyle(Book book, Style style);
+    void insert(Book book);
 
     Book getByName(String name);
 
     List<Book> getAll();
 
-    void deleteById(int id);
+    void delete(Book book);
 
 }
