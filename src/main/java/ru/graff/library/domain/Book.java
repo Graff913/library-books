@@ -1,20 +1,28 @@
 package ru.graff.library.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
+@Entity
 public class Book {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private final String name;
+    private String name;
+
+    @OneToMany
     private List<Style> styles;
+    @OneToMany
     private List<Author> authors;
 
-    public Book(String name) {
-        this.name = name;
+    public Book() {
     }
 
-    public Book(int id, String name) {
-        this.id = id;
+    public Book(String name) {
         this.name = name;
     }
 
@@ -22,8 +30,16 @@ public class Book {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Style> getStyles() {

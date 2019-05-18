@@ -4,18 +4,16 @@ import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;
 import ru.graff.library.domain.Style;
 
+import java.util.List;
+
 public interface LibraryService {
 
-    String showAllBooks();
+    List<Book> showAllBooks();
 
     void addBook(Book book);
 
-    void addAuthorBook(Book book, Author author);
+    List<Author> showAllAuthor();
 
-    void addStyleBook(Book book, Style style);
-
-    String showAllAuthor();
-
-    String showAllStyles();
+    List<Style> showAllStyles();
 
 }

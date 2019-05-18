@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LibraryApplication {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(LibraryApplication.class, args);
+        SpringApplication.run(LibraryApplication.class);
         Console.main(args);
     }
 
