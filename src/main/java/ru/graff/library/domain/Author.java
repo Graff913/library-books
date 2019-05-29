@@ -1,8 +1,6 @@
 package ru.graff.library.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Author {
@@ -11,6 +9,9 @@ public class Author {
     @GeneratedValue
     private int id;
     private String name;
+
+    @ManyToOne
+    private Book book;
 
     public Author() {
     }
@@ -33,6 +34,14 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @Override

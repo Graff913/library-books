@@ -1,9 +1,10 @@
 package ru.graff.library.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,10 +15,13 @@ public class Book {
     private int id;
     private String name;
 
-    @OneToMany
-    private List<Style> styles;
-    @OneToMany
-    private List<Author> authors;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Style> styles = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Author> authors = new ArrayList<>();
 
     public Book() {
     }
@@ -46,16 +50,18 @@ public class Book {
         return styles;
     }
 
-    public void setStyles(List<Style> styles) {
-        this.styles = styles;
+    public void addStyle(Style style) {
+        style.setBook(this);
+        styles.add(style);
     }
 
     public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
+    public void addAuthor(Author author) {
+        author.setBook(this);
+        authors.add(author);
     }
 
     @Override
