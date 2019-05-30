@@ -14,7 +14,7 @@ public class LibraryServiceImpl implements LibraryService {
     private final StyleRepository styleRepository;
     private final BookRepository bookRepository;
 
-    public LibraryServiceImpl(AuthorRepository authorRepository, StyleRepository styleRepository, BookRepository bookRepository) {
+    public LibraryServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository, StyleRepository styleRepository) {
         this.authorRepository = authorRepository;
         this.styleRepository = styleRepository;
         this.bookRepository = bookRepository;
@@ -22,22 +22,24 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public List<Book> showAllBooks() {
-        return bookRepository.getAll();
+        return bookRepository.findAll();
     }
 
     @Override
     public void addBook(Book book) {
-        bookRepository.insert(book);
+        bookRepository.save(book);
+        authorRepository.saveAll(book.getAuthors());
+        styleRepository.saveAll(book.getStyles());
     }
 
     @Override
     public List<Author> showAllAuthor() {
-        return authorRepository.getAll();
+        return authorRepository.findAll();
     }
 
     @Override
     public List<Style> showAllStyles() {
-        return styleRepository.getAll();
+        return styleRepository.findAll();
     }
 
 }

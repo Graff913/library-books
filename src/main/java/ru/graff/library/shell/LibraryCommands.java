@@ -9,10 +9,15 @@ import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;
 import ru.graff.library.domain.Style;
 
-import java.util.Collections;
-
 @ShellComponent
 public class LibraryCommands {
+
+//    add-book --name-book name1 --name-author name2 --name-style name3
+//    add-book --name-book name4 --name-author name5 --name-style name6
+
+//    show-all-author
+//    show-all-books
+//    show-all-styles
 
     private final LibraryService service;
 
@@ -36,8 +41,8 @@ public class LibraryCommands {
         Book book = new Book(nameBook);
         Author author = new Author(nameAuthor);
         Style style = new Style(nameStyle);
-        book.setAuthors(Collections.singletonList(author));
-        book.setStyles(Collections.singletonList(style));
+        book.addAuthor(author);
+        book.addStyle(style);
         service.addBook(book);
     }
 

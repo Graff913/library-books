@@ -1,16 +1,15 @@
 package ru.graff.library.dao;
 
+import org.springframework.data.repository.CrudRepository;
 import ru.graff.library.domain.Author;
 
 import java.util.List;
 
-public interface AuthorRepository {
-
-    void insert(Author author);
+public interface AuthorRepository extends CrudRepository<Author, Integer> {
 
     Author getByName(String name);
 
-    List<Author> getAll();
+    List<Author> findAll();
 
     void delete(Author author);
 

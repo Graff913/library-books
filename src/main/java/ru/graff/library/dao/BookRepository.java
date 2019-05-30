@@ -1,18 +1,17 @@
 package ru.graff.library.dao;
 
-import ru.graff.library.domain.Author;
+import org.springframework.data.repository.CrudRepository;
 import ru.graff.library.domain.Book;
-import ru.graff.library.domain.Style;
 
 import java.util.List;
 
-public interface BookRepository {
+public interface BookRepository extends CrudRepository<Book, Integer> {
 
-    void insert(Book book);
+    Book save(Book book);
 
     Book getByName(String name);
 
-    List<Book> getAll();
+    List<Book> findAll();
 
     void delete(Book book);
 
