@@ -1,23 +1,23 @@
 package ru.graff.library.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 
-@Document(collection = "authors")
+@Entity
+@Table(name = "authors")
 public class Author {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
-    @Field("name")
+    @Column(name="name")
     private String name;
 
-    private List<Book> books = new ArrayList<>();
+    @OneToMany(mappedBy="author", fetch=FetchType.LAZY, orphanRemoval = true)
+    private Set<Book> books;
 
     public Author() {
     }
@@ -40,10 +40,6 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Book> getBooks() {
-        return books;
     }
 
     @Override

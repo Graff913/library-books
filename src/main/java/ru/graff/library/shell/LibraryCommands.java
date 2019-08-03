@@ -30,20 +30,18 @@ public class LibraryCommands {
         return str.toString();
     }
 
-    @ShellMethod("Show all books.")
-    public String showAllBooksByAuthorName(
-            @ShellOption String name) {
-        StringBuilder str = new StringBuilder();
-        service.showAllBooksByAuthorName(name).forEach(b -> { str.append(b); str.append("\n"); });
-        return str.toString();
-    }
-
     @ShellMethod("Add book.")
     public void addBook(
             @ShellOption String nameBook,
             @ShellOption String nameAuthor,
             @ShellOption String nameStyle) {
         service.addBook(nameBook, nameAuthor, nameStyle);
+    }
+
+    @ShellMethod("Delete book.")
+    public void deleteBook(
+            @ShellOption int id){
+        service.deleteBook(id);
     }
 
     @ShellMethod("Show all authors.")

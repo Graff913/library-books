@@ -1,22 +1,26 @@
 package ru.graff.library.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import javax.persistence.*;
+import java.util.List;
 
-@Document(collection = "books")
+@Entity
+@Table(name = "books")
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", nullable = false)
     private int id;
-    @Field("name")
+
+    @Column(name="name")
     private String name;
 
-    @DBRef
+    @ManyToOne
+    @JoinColumn(name = "style_id")
     private Style style;
 
-    @DBRef
+    @ManyToOne
+    @JoinColumn(name = "author_id")
     private Author author;
 
     public Book() {

@@ -2,9 +2,9 @@ package ru.graff.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableMongoRepositories(basePackages = "ru.graff.library.repository")
+@EnableJpaRepositories
 @SpringBootApplication
 public class LibraryApplication {
 
