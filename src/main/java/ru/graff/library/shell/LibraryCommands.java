@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.graff.library.dao.LibraryService;
-import ru.graff.library.domain.Author;
-import ru.graff.library.domain.Book;
-import ru.graff.library.domain.Style;
+import ru.graff.library.repository.LibraryService;
 
 @ShellComponent
 public class LibraryCommands {
@@ -33,17 +30,20 @@ public class LibraryCommands {
         return str.toString();
     }
 
+    @ShellMethod("Show all books.")
+    public String showAllBooksByAuthorName(
+            @ShellOption String name) {
+        StringBuilder str = new StringBuilder();
+        service.showAllBooksByAuthorName(name).forEach(b -> { str.append(b); str.append("\n"); });
+        return str.toString();
+    }
+
     @ShellMethod("Add book.")
     public void addBook(
             @ShellOption String nameBook,
             @ShellOption String nameAuthor,
             @ShellOption String nameStyle) {
-        Book book = new Book(nameBook);
-        Author author = new Author(nameAuthor);
-        Style style = new Style(nameStyle);
-        book.addAuthor(author);
-        book.addStyle(style);
-        service.addBook(book);
+        service.addBook(nameBook, nameAuthor, nameStyle);
     }
 
     @ShellMethod("Show all authors.")
