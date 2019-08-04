@@ -1,10 +1,13 @@
-package ru.graff.library.repository;
+package ru.graff.library.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;
 import ru.graff.library.domain.Style;
+import ru.graff.library.repository.AuthorRepository;
+import ru.graff.library.repository.BookRepository;
+import ru.graff.library.repository.StyleRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +38,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void addBook(String name, String authorName, String styleName) {
+    public Book addBook(String name, String authorName, String styleName) {
         Optional<Author> authorOptional = authorRepository.findByName(authorName);
         Author author;
         if (!authorOptional.isPresent()) {
@@ -50,11 +53,11 @@ public class LibraryServiceImpl implements LibraryService {
             styleRepository.save(style);
         }
         Book book = new Book(name, author, style);
-        bookRepository.save(book);
+        return bookRepository.save(book);
     }
 
     @Override
-    public void updateBook(Integer id, String name, String authorName, String styleName) {
+    public Book updateBook(Integer id, String name, String authorName, String styleName) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Author author;
@@ -77,8 +80,9 @@ public class LibraryServiceImpl implements LibraryService {
             book.setName(name);
             book.setAuthor(author);
             book.setStyle(style);
-            bookRepository.save(book);
+            return bookRepository.save(book);
         }
+        return null;
     }
 
     @Override
@@ -93,8 +97,18 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    public void deleteAuthor(Integer id) {
+        authorRepository.deleteById(id);
+    }
+
+    @Override
     public List<Style> showAllStyles() {
         return styleRepository.findAll();
+    }
+
+    @Override
+    public void deleteStyle(Integer id) {
+        styleRepository.deleteById(id);
     }
 
     @Override

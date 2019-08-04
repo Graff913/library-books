@@ -1,4 +1,4 @@
-package ru.graff.library.repository;
+package ru.graff.library.service;
 
 import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;
@@ -13,15 +13,20 @@ public interface LibraryService {
 
     Optional<Book> findBookById(Integer id);
 
-    void addBook(String name, String author, String style);
+    Book addBook(String name, String author, String style);
 
-    void updateBook(Integer id, String name, String authorName, String styleName);
+    Book updateBook(Integer id, String name, String authorName, String styleName);
 
     void deleteBook(Integer id);
 
     List<Author> showAllAuthor();
 
+    void deleteAuthor(Integer id);
+
     List<Style> showAllStyles();
+
+
+    void deleteStyle(Integer id);
 
     long countBooks();
 

@@ -26,7 +26,7 @@ public class StyleRepositoryJpaTest {
     private StyleRepository styleRepository;
 
     @Test
-    public void whenGetByName_thenReturnGenre(){
+    public void whenGetByName_thenReturnStyle(){
         Style style = new Style("Тестовый стиль");
         entityManager.persist(style);
         entityManager.flush();

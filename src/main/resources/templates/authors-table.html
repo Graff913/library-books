@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        body {
+            padding: 100px;
+        }
+
+        .authors, .authors td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="authorsdiv">
+    <table class="authors">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия и имя</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}">
+            <td width="30" th:text="${author.id}">1</td>
+            <td width="150 " th:text="${author.name}">Foo John</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

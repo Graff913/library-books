@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        body {
+            padding: 100px;
+        }
+
+        .styles, .styles td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="stylesdiv">
+
+    <table class="styles">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название жанра</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="style : ${styles}">
+            <td width="50" th:text="${style.id}">1</td>
+            <td width="250 " th:text="${style.name}">Foo</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

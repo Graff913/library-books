@@ -4,10 +4,10 @@
     <meta charset="UTF-8"/>
     <style type="text/css">
         body {
-            padding: 50px;
+            padding: 100px;
         }
 
-        .genres, .genres td {
+        .styles, .styles td {
             border: 1px solid lightgray;
             padding: 5px;
         }
@@ -21,29 +21,26 @@
             margin-top: 10px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="styles.js"></script>
 </head>
 <body>
-<a th:href="@{/}" href="index.html">Библиотека</a>
-<br>
-<h1>Комментарии:</h1>
-
-<table class="genres">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Название стиля</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="style : ${styles}">
-        <td width="50" th:text="${style.id}" >1</td>
-        <td width="250 " th:text="${style.name}" >Foo</td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<br>
-<br>
-
+<p>
+    <a th:href="@{/}" href="index.html">Библиотека</a>
+</p>
+<h3>Жанры:</h3>
+<p>
+<div id="styleTable"></div>
+</p>
+<form id="del-form" action="/api/styles.html">
+    <h3>Удаление жанра:</h3>
+    <div class="row">
+        <label for="styleId">ID:</label>
+        <input id="styleId" type="text" value=""/>
+    </div>
+    <div class="row">
+        <button width="150" type="submit">Удалить</button>
+    </div>
+</form>
 </body>
 </html>
