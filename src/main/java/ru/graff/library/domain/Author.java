@@ -1,17 +1,23 @@
 package ru.graff.library.domain;
 
 import javax.persistence.*;
+import java.util.Set;
+
 
 @Entity
+@Table(name = "authors")
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
+    @Column(name="name")
     private String name;
 
-    @ManyToOne
-    private Book book;
+    @OneToMany(mappedBy="author", fetch=FetchType.LAZY, orphanRemoval = true)
+    private Set<Book> books;
 
     public Author() {
     }
@@ -34,14 +40,6 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     @Override

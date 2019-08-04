@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .table-books, .table-books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="books.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var books = /*[[${books}]]*/ 'null';
+        /*]]>*/
+    </script>
+</head>
+<body>
+<p>
+    <a th:href="@{/}" href="index.html">Библиотека</a>
+</p>
+<h1>Книги:</h1>
+<p>
+<div id="editTable"></div>
+</p>
+<div id="bookTable"></div>
+<form id="adding-form" action="/api/books.html">
+    <h3>Добавить книгу:</h3>
+
+    <div class="row">
+        <label for="bookName-input">Название:</label>
+        <input id="bookName-input" type="text"/>
+    </div>
+
+    <div class="row">
+        <label for="authorName">Автор:</label>
+        <input id="authorName" type="text"/>
+    </div>
+
+    <div class="row">
+        <label for="style">Стиль:</label>
+        <input id="style" type="text"/>
+    </div>
+
+    <div class="row">
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+</body>
+</html>

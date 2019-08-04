@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        body {
+            padding: 100px;
+        }
+
+        .authors, .authors td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="authors.js"></script>
+</head>
+<p>
+<p>
+    <a th:href="@{/}" href="index.html">Библиотека</a>
+</p>
+<h3>Авторы:</h3>
+<p>
+<div id="authorTable"></div>
+</p>
+<form id="del-form" action="/api/authors.html">
+    <h3>Удаление автора:</h3>
+    <div class="row">
+        <label for="authorId">ID:</label>
+        <input id="authorId" type="text" value=""/>
+    </div>
+    <div class="row">
+        <button width="150" type="submit">Удалить</button>
+    </div>
+</form>
+</body>
+</html>

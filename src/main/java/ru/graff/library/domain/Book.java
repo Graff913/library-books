@@ -1,33 +1,35 @@
 package ru.graff.library.domain;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", nullable = false)
     private int id;
+
+    @Column(name="name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Style> styles = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "style_id")
+    private Style style;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Author> authors = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     public Book() {
     }
 
-    public Book(String name) {
+    public Book(String name, Author author, Style style) {
         this.name = name;
+        this.author = author;
+        this.style = style;
     }
 
     public int getId() {
@@ -46,46 +48,30 @@ public class Book {
         this.name = name;
     }
 
-    public List<Style> getStyles() {
-        return styles;
+    public Style getStyle() {
+        return style;
     }
 
-    public void addStyle(Style style) {
-        style.setBook(this);
-        styles.add(style);
+    public void setStyle(Style style) {
+        this.style = style;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void addAuthor(Author author) {
-        author.setBook(this);
-        authors.add(author);
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("Название книги: ");
         str.append(name);
-        str.append(";\n     Авторы: ");
-        if (authors.size() > 0) {
-            str.append(authors.get(0));
-        } else {
-            str.append("нет авторов");
-        }
-        for (int i = 1; i < authors.size(); i++) {
-            str.append(", ").append(authors.get(i));
-        }
-        str.append(";\n     Cтили книги: ");
-        if (styles.size() > 0) {
-            str.append(styles.get(0));
-        } else {
-            str.append("нет стилей");
-        }
-        for (int i = 1; i < styles.size(); i++) {
-            str.append(", ").append(styles.get(i));
-        }
+        str.append(";\n     Автор: ");
+        str.append(author);
+        str.append(";\n     Cтиль книги: ");
+        str.append(style);
         str.append(".");
         return str.toString();
     }

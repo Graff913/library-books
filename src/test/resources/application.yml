@@ -1,0 +1,6 @@
+application:
+  version: 4.0t
+spring:
+  data:
+    mongodb:
+      port: 0

@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.graff.library.dao.LibraryService;
-import ru.graff.library.domain.Author;
-import ru.graff.library.domain.Book;
-import ru.graff.library.domain.Style;
+import ru.graff.library.service.LibraryService;
 
 @ShellComponent
 public class LibraryCommands {
@@ -38,12 +35,13 @@ public class LibraryCommands {
             @ShellOption String nameBook,
             @ShellOption String nameAuthor,
             @ShellOption String nameStyle) {
-        Book book = new Book(nameBook);
-        Author author = new Author(nameAuthor);
-        Style style = new Style(nameStyle);
-        book.addAuthor(author);
-        book.addStyle(style);
-        service.addBook(book);
+        service.addBook(nameBook, nameAuthor, nameStyle);
+    }
+
+    @ShellMethod("Delete book.")
+    public void deleteBook(
+            @ShellOption int id){
+        service.deleteBook(id);
     }
 
     @ShellMethod("Show all authors.")
