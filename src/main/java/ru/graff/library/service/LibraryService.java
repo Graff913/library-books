@@ -1,4 +1,4 @@
-package ru.graff.library.repository;
+package ru.graff.library.service;
 
 import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;

@@ -21,11 +21,8 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient(Collections.singletonList(
-                new ServerAddress(env.getRequiredProperty("spring.data.mongodb.host"),
-                        Integer.valueOf(env.getRequiredProperty("spring.data.mongodb.port")))),
-                Collections.singletonList(
-                        MongoCredential.createCredential("sergey", "admin", "12345".toCharArray())));
+        return new MongoClient(env.getRequiredProperty("spring.data.mongodb.host"),
+                        Integer.valueOf(env.getRequiredProperty("spring.data.mongodb.port")));
     }
 
     @Override
