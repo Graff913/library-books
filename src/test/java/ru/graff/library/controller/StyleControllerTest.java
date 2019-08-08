@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Style;
-import ru.graff.library.repository.LibraryService;
+import ru.graff.library.service.LibraryService;
 
 import java.util.Arrays;
 import java.util.List;

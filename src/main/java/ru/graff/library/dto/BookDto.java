@@ -1,4 +1,6 @@
-package ru.graff.library.domain;
+package ru.graff.library.dto;
+
+import ru.graff.library.domain.Book;
 
 public class BookDto {
 

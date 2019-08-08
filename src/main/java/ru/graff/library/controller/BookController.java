@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.graff.library.domain.Book;
-import ru.graff.library.domain.BookDto;
-import ru.graff.library.repository.LibraryService;
+import ru.graff.library.dto.BookDto;
+import ru.graff.library.service.LibraryService;
 
 import java.util.List;
 import java.util.Optional;
