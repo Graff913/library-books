@@ -1,0 +1,14 @@
+application:
+  version: 4.0
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      host: 188.227.18.141
+      port: 27017
+      database: lib
+      username: temp_user
+      password: temp_pas
+  shell:
+    interactive:
+      enabled: true

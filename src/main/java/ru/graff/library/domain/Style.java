@@ -1,17 +1,16 @@
 package ru.graff.library.domain;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
+@Document(collection = "styles")
 public class Style {
 
     @Id
-    @GeneratedValue
     private int id;
+    @Field("name")
     private String name;
-
-    @ManyToOne
-    private Book book;
 
     public Style() {
     }
@@ -34,14 +33,6 @@ public class Style {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     @Override

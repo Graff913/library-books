@@ -1,13 +1,18 @@
-package ru.graff.library.dao;
+package ru.graff.library.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.graff.library.domain.Author;
 import ru.graff.library.domain.Book;
 import ru.graff.library.domain.Style;
+import ru.graff.library.repository.AuthorRepository;
+import ru.graff.library.repository.BookRepository;
+import ru.graff.library.repository.StyleRepository;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class LibraryServiceImpl implements LibraryService {
 
     private final AuthorRepository authorRepository;
@@ -26,10 +31,25 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void addBook(Book book) {
+    public List<Book> showAllBooksByAuthorName(String authorName) {
+        return authorRepository.findAllBooksByAuthorName(authorName);
+    }
+
+    @Override
+    public void addBook(String name, String authorName, String styleName) {
+        Author author = authorRepository.findByName(authorName);
+        if (author == null) {
+            author = new Author(authorName);
+            authorRepository.save(author);
+        }
+        Style style = styleRepository.findByName(styleName);
+        if (style == null) {
+            style = new Style(styleName);
+            styleRepository.save(style);
+        }
+        Book book = new Book(name, author, style);
         bookRepository.save(book);
-        authorRepository.saveAll(book.getAuthors());
-        styleRepository.saveAll(book.getStyles());
+        authorRepository.addBook(author, book);
     }
 
     @Override
